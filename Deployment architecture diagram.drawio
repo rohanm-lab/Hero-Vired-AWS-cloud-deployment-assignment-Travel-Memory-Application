@@ -1,0 +1,83 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.5.1">
+  <diagram name="Page-1" id="t087XEfkTKzc-jaBU7ZZ">
+    <mxGraphModel dx="545" dy="291" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1" value="TravelMemory Assignment (MERN) — AWS + ALB + ASG + Cloudflare + MongoDB Atlas" vertex="1">
+          <mxGeometry height="40" width="800" x="400" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="user" parent="1" style="shape=mxgraph.aws3.user;outlineConnect=0;html=1;align=center;verticalAlign=middle;strokeColor=#111111;fillColor=#FFFFFF;fontSize=14" value="User / Browser" vertex="1">
+          <mxGeometry height="90" width="120" x="60" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudflare" parent="1" style="shape=cloud;whiteSpace=wrap;html=1;fillColor=#f7b955;strokeColor=#b36b00;fontSize=14;fontStyle=1" value="Cloudflare DNS&#xa;(Free Plan)" vertex="1">
+          <mxGeometry height="120" width="220" x="230" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="cf_notes" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12" value="Records:&#xa;• CNAME: app → tm-alb-395040887.ap-south-1.elb.amazonaws.com&#xa;• A: frontend → &lt;Frontend EC2 Public IP&gt; &#xa;Proxy: DNS only" vertex="1">
+          <mxGeometry height="90" width="220" x="230" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="alb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#daf5d7;strokeColor=#2d7a2d;fontSize=14;fontStyle=1" value="AWS Application Load Balancer (ALB)&#xa;Listener: HTTP 80&#xa;Rules: &#xa;• &#39;/&#39; → tg-frontend&#xa;• &#39;/trip*&#39; → tg-backend" vertex="1">
+          <mxGeometry height="140" width="300" x="520" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="tg_frontend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4ce;strokeColor=#8a6d00;fontSize=13" value="Target Group: tg-frontend&#xa;Protocol: HTTP:80&#xa;Health check: &#39;/&#39;" vertex="1">
+          <mxGeometry height="110" width="260" x="900" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="tg_backend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4ce;strokeColor=#8a6d00;fontSize=13" value="Target Group: tg-backend&#xa;Protocol: HTTP:80&#xa;Health check: &#39;/trip&#39;" vertex="1">
+          <mxGeometry height="110" width="260" x="900" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="asg_frontend" parent="1" style="swimlane;startSize=28;rounded=1;html=1;whiteSpace=wrap;fillColor=#d7e8ff;strokeColor=#1f55a5;fontSize=13;fontStyle=1" value="ASG: asg-frontend&#xa;Desired/Min/Max: 2 / 2 / 4&#xa;Launch Template: lt-frontend (v2)" vertex="1">
+          <mxGeometry height="180" width="330" x="1200" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="fe1" parent="asg_frontend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2ff;strokeColor=#1f55a5;fontSize=12" value="EC2 Frontend Instance&#xa;Nginx → React Build&#xa;SG: frontend-sg" vertex="1">
+          <mxGeometry height="60" width="140" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fe2" parent="asg_frontend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2ff;strokeColor=#1f55a5;fontSize=12" value="EC2 Frontend Instance&#xa;Nginx → React Build&#xa;SG: frontend-sg" vertex="1">
+          <mxGeometry height="60" width="140" x="170" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="asg_backend" parent="1" style="swimlane;startSize=28;rounded=1;html=1;whiteSpace=wrap;fillColor=#d7e8ff;strokeColor=#1f55a5;fontSize=13;fontStyle=1" value="ASG: asg-backend&#xa;Desired/Min/Max: 2 / 2 / 4&#xa;Launch Template: lt-backend (v1)" vertex="1">
+          <mxGeometry height="180" width="330" x="1200" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="be1" parent="asg_backend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2ff;strokeColor=#1f55a5;fontSize=12" value="EC2 Backend Instance&#xa;Nginx → Node (PM2)&#xa;PORT: 3001&#xa;SG: backend-sg" vertex="1">
+          <mxGeometry height="70" width="140" x="20" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="be2" parent="asg_backend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cfe2ff;strokeColor=#1f55a5;fontSize=12" value="EC2 Backend Instance&#xa;Nginx → Node (PM2)&#xa;PORT: 3001&#xa;SG: backend-sg" vertex="1">
+          <mxGeometry height="70" width="140" x="170" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="atlas" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c9f2f2;strokeColor=#1e8c8c;fontSize=13;fontStyle=1" value="MongoDB Atlas&#xa;Cluster: rohanmangatecluster&#xa;Used by backend via MONGO_URI" vertex="1">
+          <mxGeometry height="110" width="260" x="1580" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="sg_notes" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12" value="Security Groups:&#xa;• alb-sg (HTTP 80 from world)&#xa;• frontend-sg (HTTP 80 from alb-sg; SSH 22 from My IP)&#xa;• backend-sg (HTTP 80 from alb-sg; SSH 22 from My IP)" vertex="1">
+          <mxGeometry height="110" width="300" x="520" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="e_user_cf" edge="1" parent="1" source="user" style="endArrow=block;strokeColor=#333333;strokeWidth=2" target="cloudflare">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cf_alb" edge="1" parent="1" source="cloudflare" style="endArrow=block;strokeColor=#333333;strokeWidth=2" target="alb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_alb_tgf" edge="1" parent="1" source="alb" style="endArrow=block;strokeColor=#2d7a2d;strokeWidth=2;fontSize=12;labelBackgroundColor=#daf5d7" target="tg_frontend" value="&#39;/&#39;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_alb_tgb" edge="1" parent="1" source="alb" style="endArrow=block;strokeColor=#2d7a2d;strokeWidth=2;fontSize=12;labelBackgroundColor=#daf5d7" target="tg_backend" value="&#39;/trip*&#39;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="850" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_tgf_asgf" edge="1" parent="1" source="tg_frontend" style="endArrow=block;strokeColor=#8a6d00;strokeWidth=2" target="asg_frontend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tgb_asgb" edge="1" parent="1" source="tg_backend" style="endArrow=block;strokeColor=#8a6d00;strokeWidth=2" target="asg_backend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_backend_atlas_1" edge="1" parent="1" source="asg_backend" style="dashed=1;endArrow=block;strokeColor=#1e8c8c;strokeWidth=2" target="atlas">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="frontend_a_note" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fontSize=12" value="Direct path (A record):&lt;br&gt;frontend. → Frontend EC2 (&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Times New Roman&amp;quot;; font-size: 14px; white-space: pre;&quot;&gt;43.205.143.160&lt;/span&gt;)" vertex="1">
+          <mxGeometry height="60" width="220" x="230" y="365" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
