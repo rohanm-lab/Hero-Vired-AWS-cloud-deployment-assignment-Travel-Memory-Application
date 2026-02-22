@@ -56,7 +56,7 @@ The architecture includes:
 
 ---
 
-## 📦 Repository Contents  
+##  Repository Contents  
 - `README.md` — You are reading it  
 - `TravelMemory_Submission_Captioned+Diagram_v2.pdf` — (All screenshots and documentation are provided in this documentation) 
 - `Deployment architecture diagram.drawio.png` — Architecture diagram (PNG)  
